@@ -1,0 +1,84 @@
+<?php include 'block/connect.php' ?>
+<div class="container">
+			<div class="row">
+<html>
+<?php
+if(isset($_POST['zminna'])) {$zminna=$_POST['zminna'];}
+$result=mysql_query("SELECT * from dt_vistava WHERE id='$zminna'");
+$myrow=mysql_fetch_array($result);
+do {
+ printf ("<p><form name='send' id='send' action=''>
+<input name='ids_s'  id='ids_s' type='hidden' value='%s'>
+<input name='idn_n'  id='idn_n' type='hidden' value='%s'>
+                <p><b>Вкажіть номер папки з фото:</b><br/>
+                <input type='text' name='photozags' id='photozags'/></p>
+                <p><b>Назва вистави:</b><br/>
+                <input type='text' id='nazvas' name='nazvas' size='100' value='%s'/></p>
+                <p><b>Автор вистави:</b><br/>
+                <input type='text' id='avtors' name='avtors' size='100' value='%s'/></p>
+                <p><b>Тип вистави:</b><br/>
+                <input type='text' id='tips' name='tips' size='100' value='%s'/></p>
+                <p><b>Тривалість вистави:</b><br/>
+                <input type='text' id='timess' name='timess' size='100' value='%s'/></p>
+                <p>Опис та Актори:<br/>
+                <textarea name='opiss' id='opiss' cols='100' rows='5'>%s</textarea></p>
+ </p>  ", $myrow["id"], $myrow["id_rep"], $myrow["nazva"], $myrow["avtor"], $myrow["tip"], $myrow["times"], $myrow["opis"]);
+}
+while ($myrow=mysql_fetch_array($result));
+
+/*Вивод чекбоксів*/
+
+
+$result=mysql_query("SELECT   actors_vistava.role,actors_vistava.id_v, actors_vistava.id_a, actors.id, actors.name,actors.id_n  from actors_vistava, actors  where actors_vistava.id_a= '$zminna' and actors_vistava.id_v=actors.id ");
+$myrow=mysql_fetch_array($result);
+if ($myrow['role'])
+{
+do {
+ printf ("<div class='col-md-6 col-sm-6'>
+
+<input type='text' size='10' id='%s' value='%s' />
+  <input alt='%s' name='checkbox1' id='%s' class='my-checkbox' type='checkbox'  value='%s'> %s</input> </form>
+</div>", $myrow["id_v"], $myrow["role"], $myrow["id_n"], $myrow["id"], $myrow["name"], $myrow["name"] );
+}
+
+while ($myrow=mysql_fetch_array($result));
+}
+else {
+do {
+ printf ("<div class='col-md-4 col-sm-6'>
+
+<input type='text' size='10' id='%s' value='%s' />
+  <input alt='%s' name='checkbox1' id='%s' class='my-checkbox' type='checkbox'    value='%s'> %s</input> </form>
+</div>", $myrow["id_v"], $myrow["role"], $myrow["id_n"], $myrow["id"], $myrow["name"], $myrow["name"] );
+}
+
+while ($myrow=mysql_fetch_array($result));
+
+}
+  ?>
+
+<!--Кінець Вивод чекбоксів -->
+<?php
+
+ $result=mysql_query("SELECT * from actors");
+ $myrow=mysql_fetch_array($result);
+
+ do {
+  printf ("<div  class='col-md-6 col-sm-6'>
+
+
+ <input type='text' size='15' id='%s' value=''/>
+ <input alt='%s' name='checkbox' id='%s' class='my-checkbox' type='checkbox'  >%s</input>
+ </div>", $myrow["id"],  $myrow["id_n"], $myrow["id"],   $myrow["name"]);
+ }
+ while ($myrow=mysql_fetch_array($result));
+ ?>
+
+
+
+
+
+  </div><!-- end row -->
+		</div><!-- end container -->
+
+  </html>

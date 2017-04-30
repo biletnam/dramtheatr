@@ -1,0 +1,68 @@
+
+<html>
+<head>
+
+<meta charset="utf-8"/>
+</head>
+<body>
+
+<?php include 'block/connect.php' ?>
+
+<div class="container">
+			<div class="row">
+<?php
+/*Вивод даних актора*/
+if(isset($_POST['zminna'])) {$zminna=$_POST['zminna'];}
+$result=mysql_query("SELECT * from dt_actors WHERE id='$zminna'");
+$myrow=mysql_fetch_array($result);
+do {
+ printf ("
+<input name='ids'  id='ids' type='hidden' value='%s'>
+<input name='idn'  id='idn' type='hidden' value='%s'>
+<p><b>Завантажте фотографію працівника:</b><br/>
+
+                <input type='file' name='phot_o' id='phot_o'/></p>
+
+<br>
+ <p><b>Порядок сортування:</b><br/>
+ <input type='text' id='sort' name='sort' size='7' value='%s'/></p>
+<br>
+                <p><b>Прізвище та Імя:</b><br/>
+
+                <input type='text' id='nama' name='nama' size='100' value='%s'/></p>
+
+                <p><b>Посада:</b><br/>
+
+                <input type='text' id='posad_a' name='posad_a' size='100' value='%s'/></p>
+
+                <p>Заслуги:<br/>
+
+                <textarea name='txtt' id='txtt' cols='100' rows='5'>%s</textarea></p>
+
+                <div id='ot1p'></div>
+
+ <p><form name='send' id='send' action=''><br>
+
+ </p></form> ", $myrow["id"], $myrow["id_n"],$myrow["sort"], $myrow["name"], $myrow["posada"], $myrow["txt"]);
+}
+while ($myrow=mysql_fetch_array($result));
+/*Кінець Вивод даних актора*/
+/*Вивод чекбоксів*/
+
+$result=mysql_query("SELECT * from dt_vistava");
+$myrow=mysql_fetch_array($result);
+
+do {
+ printf ("<div class='col-md-6 col-sm-6'>
+ <input alt='%s' name='checkbox' id='%s' class='my-checkbox' type='checkbox' value='%s'> %s</input>
+</div>", $myrow["id_rep"], $myrow["id"],$myrow["nazva"],$myrow["nazva"]);
+}
+while ($myrow=mysql_fetch_array($result));
+
+/*Кінець Вивод чекбоксів*/
+ ?>
+ </div><!-- end row -->
+		</div><!-- end container -->
+
+</body>
+  </html>

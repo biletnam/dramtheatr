@@ -1,0 +1,381 @@
+/*==========  Desktop First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1300px) {
+	.logo img{
+		max-width: 800px;
+	}
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+	.top-line-menu .under-menu .right-top-block .right-top-langauges-block .lang{
+		display: none;
+		position: absolute;
+		top: 30px;
+		right: 0;
+		z-index: 4;
+		width: 100px;
+		border: 1px #3E0101 solid;
+		background-color: #290000;
+	}
+	.top-line-menu .under-menu .right-top-block .right-top-langauges-block a:nth-child(1){
+		background-image: url(img/icons/languages-icons.png);
+		background-position: 0 0;
+		background-repeat: no-repeat;
+		-webkit-background-size: cover;
+		background-size: cover;
+	}
+	.top-line-menu .under-menu .right-top-block .right-top-langauges-block a:nth-child(2){
+		background-image: url(img/icons/languages-icons.png);
+		background-position: 0 center;
+		background-repeat: no-repeat;
+		-webkit-background-size: cover;
+		background-size: cover;
+	}
+	.top-line-menu .under-menu .right-top-block .right-top-langauges-block a:nth-child(3){
+		background-image: url(img/icons/languages-icons.png);
+		background-position: 0 bottom;
+		background-repeat: no-repeat;
+		-webkit-background-size: cover;
+		background-size: cover;
+	}
+	.top-line-menu .under-menu .right-top-block .right-top-langauges-block .lang a{
+		display: block;
+		width: 30px;
+		height: 20px;
+		margin: 15px auto;
+	}
+	.top-line-menu .under-menu .right-top-block .right-top-langauges-block .lang span{
+		display: none;
+	}
+
+	.bottom-line{
+		display: block;
+		padding: 5px 0;
+	}
+	.bottom-line span{
+		position: relative;
+	}
+
+	.carousel .title{
+		right: 20px;
+	}
+	.carousel .title h1{
+		font-size: 40px;
+	}
+	.carousel .title span{
+		font-size: 30px;
+	}
+
+	.top-line-menu .menu nav ul li a{
+		font-size: 17px;
+	}
+
+	.soc-list li a{
+		margin-left: 2px;
+	}
+	.top-line-menu .under-menu .right-top-block .right-top-langauges-block a{
+		padding: 1px 3px 1px 5px;
+	}
+
+	.title{
+		display: none;
+	}
+
+	.reper-block{
+		width: 50%;
+	}	
+}
+
+@media only screen and (max-width : 1050px) {
+	.reper{
+		width: 50%;
+	}
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+	.top-line{
+		display: block;
+		padding-top: 10px;
+	}
+	.top-line .soc-list {
+  		margin: 10px 0 10px 0;
+	}
+
+	.top-line-menu .under-menu{
+		min-height: 290px;
+	}
+	
+	.top-line-menu .menu{
+		justify-content: center;
+		text-align: center;
+	}
+
+	.top-line-menu .menu nav ul .left-li{
+		margin-top: 20px;
+		float: none;
+	}
+
+	.top-line-menu .under-menu .title-text{
+		display: block;
+		position: absolute;
+		max-width: 100%;
+		top: 0;
+		left: 0;
+		min-height: 10px;
+		text-align: center;
+		padding: 10px 0;
+		font-size: 15px;
+	}
+	.top-line-menu .under-menu .right-top-block{
+		justify-content: center;
+	}
+
+	.logo-page{
+		top: 65px;
+		margin-left: -238px;
+	}
+	.logo-page img{
+		margin-top: 0;
+	}
+
+	.new-photo{
+		margin: 20px 0;
+	}
+	.news-list{
+		margin-top: 50px;
+	}
+
+	.present article{
+		top: 15px;
+	}
+	.present article h1{
+		font-size: 50px;
+	}
+}
+
+@media only screen and (max-width : 820px) {
+	.home-block-tickets a{
+		padding-right: 60px;
+	}
+	.home-block-theatre a{
+		padding-left: 65px;
+	}
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+	.horizontal-line{
+		display: block;
+	}
+
+	.home-block-languages{
+		margin: 50px 0 10px 0;
+		padding-top: 10px;
+	}
+
+	.row-back{
+		background-color: rgba(0,0,0,0.5);
+		transition: all 0.2s;
+	}
+	.row-back:hover{
+		background-color: rgba(0,0,0,0.2);
+		transition: all 0.2s;
+	}
+
+	.home-block{
+		margin: 45px 0 100px 0;
+	}
+	.home-block a{
+		float: none;
+	}
+
+	.home-block-theatre{
+		text-align: center;
+		margin: 45px 0 0 0;
+		padding: 20px 0 50px 0;
+	}
+	.home-block-theatre a{
+		padding-left: 90px;
+	}
+	.home-block-tickets{
+		text-align: center;
+		margin: 0 0 140px 0;
+		padding: 20px 0 50px 0;
+	}
+	.home-block-tickets a{
+		padding-right: 0;
+		padding-left: 90px;
+		background-position: left -181px;
+	}
+	.home-block a:after{
+		top: 65%;
+		background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.7) 64%);
+		-webkit-background-clip: text;
+  		color: transparent;
+	}
+	.home-block-theatre a:after{
+		left: 20%;
+	}
+	.home-block-tickets a:after{
+		right: 0;
+  		left: 29.5%;
+	}
+
+	.top-line-menu .under-menu .title-text{
+		display: none;
+	}
+
+	.top-line-menu .under-menu .right-top-block{
+		min-height: 90px;
+	}
+
+	.logo-page {
+  		top: 50px;
+	}
+
+	.top-line-menu .under-menu {
+  		min-height: 278px;
+	}
+	
+	.top-line-menu .menu{
+		display: block;
+	}
+	.top-line-menu .menu nav{
+		width: 100%;
+		display: none;
+		position: absolute;
+		left: 0;
+		top: 55px;
+		background-color: #290000;
+		//border-top: 1px #3E0101 solid;
+	}
+	.top-line-menu .menu nav:before{
+			content: "";
+			width: 100%;
+			height: 55px;
+			background-image: url(img/afisha/before-bg.png);
+			background-repeat: repeat-x;
+			background-position: 0 -26px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 1;
+	}
+	.top-line-menu .menu nav ul li{
+		display: block;
+		text-align: left;
+		width: auto;
+		height: auto;
+	}
+	.top-line-menu .menu nav ul li:hover a{
+		border-bottom: none;
+	}
+	.top-line-menu .menu nav ul li a{
+		width: 100%;
+		display: block;
+		position: relative;
+		z-index: 1;
+		padding: 15px 0 15px 20px;
+		border-bottom: 1px rgba(255,255,255,0.1) solid;
+	}
+	.top-line-menu .menu nav ul li a:hover{
+		background-color: #380000;
+		padding-left: 22px;
+		border-bottom: 1px #3E0000 solid;
+	}
+	.top-line-menu .menu nav ul li .active{
+		background-color: #380000;
+		padding-left: 22px;
+		border-bottom: 1px #3E0000 solid;
+	}
+	.top-line-menu .menu nav ul .right-li a{
+		margin-left: 0;
+	}
+	.top-line-menu .menu nav ul .left-li a{
+		margin-right: 0;
+	}
+
+	.logo-page{
+		margin-left: -243px;
+	}
+
+	figure.team{
+		border-bottom: 1px #C1BA96 solid;
+	}
+
+	.date {
+  		bottom: 125px;
+  		left: 0;
+  		font-size: 28px;
+	}
+
+	.reper-block{
+		width: 100%;
+	}
+
+	.personal-inf{
+		margin-top: 50px;
+	}
+
+	.present article h1 {
+  		font-size: 34px;
+	}
+	.present article span {
+  		font-size: 30px;
+	}
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+
+}
+
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+	.top-line-menu .menu nav{
+		top: 20px;
+		display: block !important;
+	}
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 1024px) {
+	.exit {
+		margin-left: 100px;
+	}
+}
+
+ /* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+	.top-line-menu .under-menu .right-top-block .right-top-langauges-block .lang{
+		display: block !important;
+	}
+}
+
+.VKIcon .FIcon {
+	width: 200px;
+	height: 50px;
+	font-size: 20px;
+}
+

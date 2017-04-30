@@ -1,0 +1,31 @@
+<?php include 'block/connect.php' ?>
+
+<html>
+<head>
+
+<meta charset="utf-8"/>
+</head>
+<body>
+
+<?php
+if(isset($_POST['zminnatema'])) {$zminnatema=$_POST['zminnatema']; if ($zminnatema=='') {unset($zminnatema);} }
+if(isset($_POST['zminnaphoto'])) {$zminnaphoto=$_POST['zminnaphoto']; if ($zminnaphoto=='') {unset($zminnaphoto);} }
+if(isset($_POST['zminnadate'])) {$zminnadate=$_POST['zminnadate']; if ($zminnadate=='') {unset($zminnadate);} }
+if(isset($_POST['zminnatxt'])) {$zminnatxt=$_POST['zminnatxt']; if ($zminnatxt=='') {unset($zminnatxt);} }
+$zminnatema = mysql_real_escape_string($zminnatema);
+$zminnatxt = mysql_real_escape_string($zminnatxt);
+
+if (isset($zminnatema) && isset($zminnadate) && isset($zminnaphoto) && isset($zminnatxt)){
+   $mys=mysql_query("INSERT INTO dt_news (tema, date, photo,txt ) VALUES ('$zminnatema','$zminnadate','$zminnaphoto','$zminnatxt' )");
+    if ($mys=='true') {
+        echo "Рядок добавлений!";            }
+    else {
+        echo "error";
+    }
+    }
+else {
+    echo "Немає заповнених даних";
+}
+?>
+</body>
+</html>
