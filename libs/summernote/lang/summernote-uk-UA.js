@@ -14,8 +14,8 @@
         size: 'Розмір шрифту'
       },
       image: {
-        image: 'Картинка',
-        insert: 'Вставити картинку',
+        image: 'Зображення',
+        insert: 'Вставити зображення',
         resizeFull: 'Відновити розмір',
         resizeHalf: 'Зменшити до 50%',
         resizeQuarter: 'Зменшити до 25%',
@@ -26,11 +26,11 @@
         shapeCircle: 'Форма: Коло',
         shapeThumbnail: 'Форма: Мініатюра',
         shapeNone: 'Форма: Немає',
-        dragImageHere: 'Перетягніть сюди картинку',
-        dropImage: 'Перетягніть картинку',
+        dragImageHere: 'Перетягніть сюди зображення',
+        dropImage: 'Перетягніть зображення',
         selectFromFiles: 'Вибрати з файлів',
-        url: 'URL картинки',
-        remove: 'Видалити картинку'
+        url: 'URL зображення',
+        remove: 'Видалити зображення'
       },
       video: {
         video: 'Відео',
