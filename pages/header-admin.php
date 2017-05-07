@@ -7,7 +7,6 @@
 <html lang="ru">
 <!--<![endif]-->
 <head>
-	<!-- <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet"> -->
 
 	<link href="css/bootstrap.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
@@ -48,7 +47,10 @@
 	<link rel="stylesheet" href="/animated.css" />
 	<link rel="stylesheet" href="/hamburgers.css" />
 	<link rel="stylesheet" href="/slider.css" />
+
+	<link href="../libs/select2/dist/css/select2.css" rel="stylesheet" />
 	<link rel="stylesheet" href="/admin.css" />
+
 	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> -->
 
 </head>

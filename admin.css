@@ -25,11 +25,14 @@ a:hover {
 }
 
 .selected-image {
-
   border-color: #286090;
   border-style: solid;
   border-width: 5px;
   /*border: 2px solid #000;*/
   /*outline: 5px solid #286090;
   outline-offset: -5px;*/
+}
+
+.select2-results__option, .select2-search__field {
+  color: #333;
 }

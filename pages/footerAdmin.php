@@ -50,6 +50,8 @@
 <script src="/js/modernizr.js"></script>
 <script src="/js/main.js"></script>
 
+<script src="../libs/select2/dist/js/select2.min.js"></script>
+
 <!-- Yandex.Metrika counter --><!-- /Yandex.Metrika counter -->
 <!-- Google Analytics counter --><!-- /Google Analytics counter -->
 

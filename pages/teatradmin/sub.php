@@ -22,7 +22,7 @@ $myrow = mysql_fetch_array($result);
 
 do {
 	$araay[] = $myrow["photo"];
-} while ($myrow=mysql_fetch_array($result));
+} while ($myrow = mysql_fetch_array($result));
 
 $uploaddir='../img/';
 $fot = $_FILES['uploadfile']['name'];
@@ -31,7 +31,7 @@ if (in_array($fot,$araay)) {
 	echo "Таке фото вже існує!!!";
 } else {
 	move_uploaded_file($_FILES['uploadfile']['tmp_name'], $uploaddir.$fot);
-	$res= mysql_query ("INSERT INTO dt_photo (photo,id_act,id_vist,id_new,category)
-											VALUES ('$fot','$ids','$ids_s','$idn','$category')");
-	if ($res=='true') {echo "Рядок успішно добавлений";}
-} while ($myrow=mysql_fetch_array($result));
+	$res = mysql_query ("INSERT INTO dt_photo (photo,id_act,id_vist,id_new,category)
+				 							 VALUES ('$fot','$ids','$ids_s','$idn','$category')");
+	if ($res) echo "Рядок успішно добавлений";
+} while ($myrow = mysql_fetch_array($result));
