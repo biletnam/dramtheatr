@@ -26,14 +26,18 @@ if (isset($_POST['zminnaopis'])) {
   $zminnaopis = $_POST['zminnaopis'];
   if ($zminnaopis == '') unset($zminnaopis);
 }
+if (isset($_POST['zminnaphotozag'])) {
+  $zminnaphotozag = $_POST['zminnaphotozag'];
+  if ($zminnaphotozag == '') unset($zminnaphotozag);
+}
 
 if (isset($zminnatip) &&
     isset($zminnanazva) &&
     isset($zminnaavtor) &&
     isset($zminnatimes) &&
     isset($zminnaopis)) {
-  $sql = 'INSERT INTO dt_vistava (id_rep, tip, nazva, avtor, times, opis)
-          VALUES (:id_rep, :tip, :nazva, :avtor, :times, :opis)';
+  $sql = 'INSERT INTO dt_vistava (id_rep, tip, nazva, avtor, times, opis, photozag)
+          VALUES (:id_rep, :tip, :nazva, :avtor, :times, :opis, :photozag)';
   $result = $db1->prepare($sql);
   $result->bindParam(':id_rep', $zminnww, PDO::PARAM_STR);
   $result->bindParam(':tip', $zminnatip, PDO::PARAM_STR);
@@ -41,6 +45,7 @@ if (isset($zminnatip) &&
   $result->bindParam(':avtor', $zminnaavtor, PDO::PARAM_STR);
   $result->bindParam(':times', $zminnatimes, PDO::PARAM_STR);
   $result->bindParam(':opis', $zminnaopis, PDO::PARAM_STR);
+  $result->bindParam(':photozag', $zminnaphotozag, PDO::PARAM_STR);
   $response = $result->execute();
   if ($response == 'true') {
     echo "Рядок добавлений!";

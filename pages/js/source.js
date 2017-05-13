@@ -1,28 +1,5 @@
 $(document).ready(function() {
 
-  if ($("#chat" ).val() == 0) {
-    $("#next").hide();
-  } else {
-    $("#next").show();
-  }
-
-  $("#result").hide();
-  $(".active").click(function() {
-    $("#result").hide();
-  });
-
-  $("#next").click(function(event) {
-    $("#result").show();
-    event.preventDefault();
-    $.ajax({
-      url: "aaf.php",
-      dataType: "html",
-      success: function(result){
-        $('#result').html(result)
-      }
-    });
-  });
-
   /* глобальные переменные */
   var event_start = $('#event_start');
   var event_end = $('#event_end');

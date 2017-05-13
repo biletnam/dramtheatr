@@ -24,7 +24,6 @@ while ($row = $result->fetch()) {
   $actors[$i]['id'] = $row['id'];
   $actors[$i]['id_n'] = $row['id_n'];
   $actors[$i]['name'] = $row['name'];
-  $actors[$i]['sorts'] = $row['sorts'];
   $i++;
 }
 ?>

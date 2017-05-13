@@ -6,10 +6,6 @@ $db1 = Db::getConnection();
 
 $id = $_GET["id"];
 $id_n = $_GET["id_n"];
-// $result = mysql_query("SELECT nazva, avtor, times, tip, id, opis FROM dt_vistava WHERE id='$id'",$db);
-// $myrow = mysql_fetch_array($result);
-// $title = $myrow["nazva"];
-// do {
 $result = $db1->query("SELECT
   dt_vistava.nazva,
   dt_vistava.avtor,
@@ -83,35 +79,6 @@ while ($row = $result->fetch()) {
                   <?php endforeach; ?>
                 </tbody>
               </table>
-              <?php
-            //   echo "	<script>
-            //   var title='$title';
-            //   $(document).attr('title', title);
-            //   $(document).$(meta).$(name).$(description).attr('content', title);
-            //   </script>";
-            // } while ($myrow=mysql_fetch_array($result));
-            // $sql = "SELECT DISTINCT id_v, sorts, id_n, role FROM dt_actors_vistava WHERE id_a = '$id' order by sorts ASC";
-            // $result = mysql_query($sql) or die(mysql_error());
-            // $caption = 'Втілюють в життя: <br><br>';
-            //
-            // while ($row = mysql_fetch_assoc($result)) {
-            //   $id_v = $row['id_v'];
-            //   $id_n = $row['id_n'];
-            //   $int = 1;
-            //
-            //   $res = mysql_query("SELECT name, sort FROM dt_actors WHERE id='$id_v'",$db);
-            //   $myrow = mysql_fetch_array($res);
-            //
-            //   if($myrow["name"]) {
-            //     echo $caption;
-            //     $caption = '';
-            //   }
-            //   do {
-            //     printf("%s - <a class='actor-link' href='/pages/team-person.php?id=$id_v&id_n=$id_n&int=$int'>%s</a><br>", $row["role"], $myrow["name"]);
-            //   } while ($myrow=mysql_fetch_array($res));
-            // }
-            ?>
-
               <br>
               <div>
                 <div class="pluso" data-background="#ebebeb" data-options="medium,round,line,horizontal,counter,theme=06" data-services="vkontakte,odnoklassniki,facebook" data-url="http://teatr.da-wsp.com.ua<?php echo $_SERVER['REQUEST_URI']; ?>"></div>

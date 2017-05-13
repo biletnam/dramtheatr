@@ -5,8 +5,6 @@ include 'teatradmin/block/connect.php';
 $db1 = Db::getConnection();
 
 $id = $_GET["id"];
-// $result = mysql_query("SELECT tema, txt, date FROM dt_news WHERE id='$id'", $db);
-// $myrow = mysql_fetch_array($result);
 
 $result = $db1->query("SELECT
 	dt_news.tema,

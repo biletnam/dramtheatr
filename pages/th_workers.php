@@ -14,10 +14,10 @@ include 'checkUser.php';
           <button id="actor" class="btn btn-default" data-toggle="tab" href="#tabWorkers" department="2">
             Актори
           </button>
-          <button id="ballet" class="btn btn-default" data-toggle="tab" href="#tabWorkers">
+          <button id="ballet" class="btn btn-default" data-toggle="tab" href="#tabWorkers" department="3">
             Балет
           </button>
-          <button id="orchestra" class="btn btn-default" data-toggle="tab" href="#tabWorkers">
+          <button id="orchestra" class="btn btn-default" data-toggle="tab" href="#tabWorkers" department="4">
             Оркестр
           </button>
           <button id="addWorker" class="btn btn-default" data-toggle="tab" href="#tabAddWorker">

@@ -1,14 +1,11 @@
 <?php
-// $result = mysql_query("SELECT znach FROM dt_activated ");
-// $myrow = mysql_fetch_array($result);
-// printf ("<input id='chat' type='hidden' value='%s'>", $myrow["znach"]);
 
 if(!ini_get('date.timezone')) {
   date_default_timezone_set('GMT');
 }
 $date = explode(".", date("d.m.Y"));
 switch ($date[1]) {
-  case 1: $m = 'Січеня'; break;
+  case 1: $m = 'Січня'; break;
   case 2: $m = 'Лютого'; break;
   case 3: $m = 'Березня'; break;
   case 4: $m = 'Квітня'; break;
@@ -23,22 +20,24 @@ switch ($date[1]) {
 }
 
 $da = date('Y-m');
-$result = $db1->query("SELECT * FROM dt_group_afisha WHERE start
-                       LIKE '$da%' ORDER BY start ASC");
+$result = $db1->query("SELECT * FROM dt_group_afisha
+  INNER JOIN dt_photo
+  ON dt_group_afisha.id_af = dt_photo.id_vist
+  WHERE start LIKE '$da%' AND category = '2' ORDER BY start ASC");
 
 $i = 1;
-do {
+while ($myrow = $result->fetch()) {
   $time = substr($myrow["start"], 11, 5);
   $day = substr($myrow["start"], 8, 2);
-  if ($myrow['id_rep'] == 2) {
-    $children = 'children/' . $myrow["photozag"];
-  } else {
-    $children = $myrow["photozag"];
-  }
+  // if ($myrow['id_rep'] == 2) {
+  //   $children = 'children/' . $myrow["photozag"];
+  // } else {
+  //   $children = $myrow["photozag"];
+  // }
   if ($i == 1 or $i == 2){
     printf("
     <div class='reper-block reper-block-img' style='position: relative;'>
-    <div style='opacity: 1; background: url(/img/spectacle/$children/banner.jpg); height:325px; width:350px;'>
+    <div style='opacity: 1; background: url(/pages/img/$myrow[photo])center/cover; height:325px; width:350px;'>
     <div class='opaline'><p>$day $m $time</p></div>
     </div>
     </div>
@@ -66,14 +65,11 @@ do {
     </div>
     </a>
     <div class='reper-block reper-block-img' style='position: relative;'>
-    <div style='opacity: 1; background: url(/img/spectacle/$children/banner.jpg); height:325px; width:350px;'>
+    <div style='opacity: 1; background: url(/pages/img/$myrow[photo])center/cover; height:325px; width:350px;'>
     <div class='opaline'><p>$day $m $time</p></div>
     </div>
     </div>", $myrow["id_af"], $myrow["themas"], $myrow["avtor"], $myrow["tip"], $myrow["times"]);
     $i++;
   }
   if ($i == 5) $i = 1;
-} while ($myrow = $result->fetch());
-?>
-
-</div>
+}

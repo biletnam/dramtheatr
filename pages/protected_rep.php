@@ -38,7 +38,7 @@ while ($row = $result->fetch()) {
     <fieldset>
       <legend><h2><b>Добавити:</b></h2></legend>
       <select name="por" id="por">
-        <option>До якого типу</option>
+        <!-- <option>До якого типу</option> -->
         <?php foreach ($spectacleCategories as $spectacleCategory): ?>
           <option value='<?php echo $spectacleCategory['id_reper']; ?>'>
             <?php echo $spectacleCategory['genre']; ?>
@@ -137,10 +137,10 @@ $(document).ready(function() {
   $("#add_reper").click(function() {
     var ww = $("#por").val();
     var znachtip = $("#tip").val();
-    var znachphotozag = $("#photozag").val();
     var znachnazva = $("#nazva").val();
     var znachavtor = $("#avtor").val();
     var znachtimes = $("#times").val();
+    var znachphotozag = 31;
     var znachopis = $("#txt").summernote('code');
     $.ajax({
       url: "teatradmin/add_perertu.php",
@@ -148,31 +148,33 @@ $(document).ready(function() {
       data: {
         zminnww: ww,
         zminnatip: znachtip,
-        zminnaphotozag: znachphotozag,
         zminnanazva: znachnazva,
         zminnaavtor: znachavtor,
         zminnatimes: znachtimes,
+        zminnaphotozag: znachphotozag,
         zminnaopis: znachopis
       },
       dataType: "html",
       success: function(data) {
-        $("#message").html(data);
+        console.log(data);
+        // $("#message").html(data);
         location.reload();
       }
     });
   });
 
   $("#delet_reperuar").click(function() {
-    var znachid = $("#del_reper").val();
+    var repertoireSpectacleId = $("#del_reper").val();
     $.ajax({
       url: "teatradmin/delete_reper.php",
       method: "POST",
       data: {
-        zminnaid: znachid
+        repertoireSpectacleId: repertoireSpectacleId
       },
       dataType: "html",
       success: function(data) {
-        $("#output_delete_reper").html(data);
+        // console.log(data);
+        // $("#output_delete_reper").html(data);
         location.reload();
       }
     });

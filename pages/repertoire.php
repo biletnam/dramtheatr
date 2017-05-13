@@ -3,6 +3,34 @@ include 'header.php';
 include 'top-line-menu.php';
 include 'teatradmin/block/connect.php';
 $db1 = Db::getConnection();
+
+function getSpectaclesByAudience($audience) {
+  $db1 = Db::getConnection();
+  $result = $db1->query("SELECT
+    dt_vistava.id,
+    dt_vistava.tip,
+    dt_vistava.nazva,
+    dt_vistava.avtor,
+    dt_vistava.times,
+    dt_photo.photo
+    FROM dt_vistava
+    INNER JOIN dt_photo
+    ON dt_vistava.id = dt_photo.id_vist
+    WHERE id_rep = '$audience' AND category = '1'
+    ORDER BY dt_vistava.id DESC");
+  $spectacles = array();
+  $i = 0;
+  while ($row = $result->fetch()) {
+    $spectacles[$i]['id'] = $row['id'];
+    $spectacles[$i]['tip'] = $row['tip'];
+    $spectacles[$i]['nazva'] = $row['nazva'];
+    $spectacles[$i]['avtor'] = $row['avtor'];
+    $spectacles[$i]['times'] = $row['times'];
+    $spectacles[$i]['photo'] = $row['photo'];
+    $i++;
+  }
+  return $spectacles;
+}
 ?>
 
 <section class="theatre parallax-window-news" data-parallax="scroll"
@@ -24,129 +52,82 @@ $db1 = Db::getConnection();
 			</div>
 		</div>
 	</div>
-	<div class="reper-list" id="abstract">
-
-<?php
-$result = $db1->query("SELECT * FROM dt_vistava WHERE id_rep='1' ORDER BY id DESC");
-$myrows = array();
-$i = 0;
-while ($row = $result->fetch()) {
-	$myrows[$i]['id'] = $row['id'];
-	$myrows[$i]['tip'] = $row['tip'];
-	$myrows[$i]['nazva'] = $row['nazva'];
-	$myrows[$i]['avtor'] = $row['avtor'];
-	$myrows[$i]['times'] = $row['times'];
-	$i++;
-}
-$i = 1;
-foreach ($myrows as $myrow) {
-if ($i == 1 or $i == 2) {
-?>
-
-				<a href='/pages/spectacle.php?id=<?php echo $myrow["id"]; ?>&id_n=1&int=$int'>
-					<div class='reper-block reper-block-img'>
-						<img src='/pages/img/<?php select_photo(id_vist, $myrow['id'], 2) ?>'
-								 height='480' width='480' alt='photo'>
-					</div>
-					<div class='reper-block reper-block-text'>
-						<figure>
-							<article><?php echo $myrow["nazva"]; ?></article><br>
-							<span><?php echo $myrow["avtor"]; ?></span><br>
-							<p><?php echo $myrow["tip"]; ?></p><br>
-							<p><?php echo $myrow["times"]; ?></p><br>
-						</figure>
-					</div>
-				</a>
-
-<?php
-$i++;
-} else {
-?>
-
-				<a href='/pages/spectacle.php?id=<?php echo $myrow["id"]; ?>&id_n=1&int=$int'>
-					<div class='reper-block reper-block-text'>
-						<figure>
-							<article><?php echo $myrow["nazva"]; ?></article><br>
-							<span><?php echo $myrow["avtor"]; ?></span><br>
-							<p><?php echo $myrow["tip"]; ?></p><br>
-							<p><?php echo $myrow["times"]; ?></p><br>
-						</figure>
-					</div>
-					<div class='reper-block reper-block-img'>
-						<img src='/pages/img/<?php select_photo(id_vist, $myrow['id'], 2) ?>'
-								 height='480' width='480' alt='photo'>
-					</div>
-				</a>
-
-<?php
-$i++;
-}
-if ($i == 5) $i = 1;
-}
-?>
-
-	</div>
-	<div class="reper-list reper-list-for-children" id="for-children">
-
-<?php
-$result = $db1->query("SELECT * FROM dt_vistava WHERE id_rep='2' ORDER BY id DESC");
-$myrows = array();
-$i = 0;
-while ($row = $result->fetch()) {
-	$myrows[$i]['id'] = $row['id'];
-	$myrows[$i]['nazva'] = $row['nazva'];
-	$myrows[$i]['avtor'] = $row['avtor'];
-	$myrows[$i]['tip'] = $row['tip'];
-	$myrows[$i]['times'] = $row['times'];
-	$i++;
-}
-$i = 1;
-foreach ($myrows as $myrow) {
-if ($i == 1 or $i == 2) {
-?>
-
-				<a href='/pages/spectacle.php?id=<?php echo $myrow["id"]; ?>&id_n=2&int=$int'>
-					<div class='reper-block reper-block-img'>
-						<img src='/pages/img/<?php select_photo(id_vist, $myrow['id'], 2) ?>'
-								 height='480' width='480' alt='photo' /> <!-- photo -->
-					</div>
-					<div class='reper-block reper-block-text'>
-						<figure>
-							<article><?php echo $myrow["nazva"]; ?></article><br>
-							<span><?php echo $myrow["avtor"]; ?></span><br>
-							<p><?php echo $myrow["tip"]; ?></p><br>
-							<p><?php echo $myrow["times"]; ?></p><br>
-						</figure>
-					</div>
-				</a>
-
-<?php
-$i++;
-} else {
-?>
-
-				<a href='/pages/spectacle.php?id=<?php echo $myrow["id"]; ?>&id_n=2&int=$int'>
-					<div class='reper-block reper-block-text'>
-						<figure>
-							<article><?php echo $myrow["nazva"]; ?></article><br>
-							<span><?php echo $myrow["avtor"]; ?></span><br>
-							<p><?php echo $myrow["tip"]; ?></p><br>
-							<p><?php echo $myrow["times"]; ?></p><br>
-						</figure>
-					</div>
-					<div class='reper-block reper-block-img'>
-						<img src='/pages/img/<?php select_photo(id_vist, $myrow['id'], 2) ?>'
-								 height='480' width='480' alt='photo'>
-					</div>
-				</a>
-
-<?php
-$i++;
-}
-if ($i == 5) $i = 1;
-}
-?>
-
-	</div>
+  <div class="reper-list" id="abstract">
+    <?php $adults = getSpectaclesByAudience(1); $i = 0; ?>
+    <?php foreach ($adults as $adult): ?>
+      <?php if ($i == 0 || $i == 1): ?>
+        <a href='/pages/spectacle.php?id=<?php echo $adult['id']; ?>&id_n=2'>
+          <div class='reper-block reper-block-img'>
+            <img src='/pages/img/<?php echo $adult['photo']; ?>'
+                 height='480' width='480' alt='photo' /> <!-- photo -->
+          </div>
+          <div class='reper-block reper-block-text' style="max-height: 325px;">
+            <figure>
+              <article><?php echo $adult['nazva']; ?></article><br>
+              <span><?php echo $adult['avtor']; ?></span><br>
+              <p><?php echo $adult['tip']; ?></p><br>
+              <p><?php echo $adult['times']; ?></p><br>
+            </figure>
+          </div>
+        </a>
+      <?php endif; ?>
+      <?php if ($i == 2 || $i == 3): ?>
+        <a href='/pages/spectacle.php?id=<?php echo $adult['id']; ?>&id_n=2'>
+          <div class='reper-block reper-block-text' style="max-height: 325px;">
+            <figure>
+              <article><?php echo $adult['nazva']; ?></article><br>
+              <span><?php echo $adult['avtor']; ?></span><br>
+              <p><?php echo $adult['tip']; ?></p><br>
+              <p><?php echo $adult['times']; ?></p><br>
+            </figure>
+          </div>
+          <div class='reper-block reper-block-img'>
+            <img src='/pages/img/<?php echo $adult['photo']; ?>'
+                 height='480' width='480' alt='photo' /> <!-- photo -->
+          </div>
+        </a>
+      <?php endif; $i++; ?>
+      <?php if ($i == 4) $i = 0; ?>
+    <?php endforeach; ?>
+  </div>
+  <div class="reper-list reper-list-for-children" id="for-children">
+    <?php $children = getSpectaclesByAudience(2); $i = 0; ?>
+    <?php foreach ($children as $child): ?>
+      <?php if ($i == 0 || $i == 1): ?>
+        <a href='/pages/spectacle.php?id=<?php echo $child['id']; ?>&id_n=2'>
+          <div class='reper-block reper-block-img'>
+            <img src='/pages/img/<?php echo $child['photo']; ?>'
+                 height='480' width='480' alt='photo' /> <!-- photo -->
+          </div>
+          <div class='reper-block reper-block-text' style="max-height: 325px;">
+            <figure>
+              <article><?php echo $child['nazva']; ?></article><br>
+              <span><?php echo $child['avtor']; ?></span><br>
+              <p><?php echo $child['tip']; ?></p><br>
+              <p><?php echo $child['times']; ?></p><br>
+            </figure>
+          </div>
+        </a>
+      <?php endif; ?>
+      <?php if ($i == 2 || $i == 3): ?>
+        <a href='/pages/spectacle.php?id=<?php echo $child['id']; ?>&id_n=2'>
+          <div class='reper-block reper-block-text' style="max-height: 325px;">
+            <figure>
+              <article><?php echo $child['nazva']; ?></article><br>
+              <span><?php echo $child['avtor']; ?></span><br>
+              <p><?php echo $child['tip']; ?></p><br>
+              <p><?php echo $child['times']; ?></p><br>
+            </figure>
+          </div>
+          <div class='reper-block reper-block-img'>
+            <img src='/pages/img/<?php echo $child['photo']; ?>'
+                 height='480' width='480' alt='photo' /> <!-- photo -->
+          </div>
+        </a>
+      <?php endif; $i++; ?>
+      <?php if ($i == 4) $i = 0; ?>
+    <?php endforeach; ?>
+  </div>
 </section>
-<?php include 'footer.php' ?>
+
+<?php include 'footer.php'; ?>

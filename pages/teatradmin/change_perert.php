@@ -30,11 +30,11 @@ if (isset($_POST['zminnaopis'])) {
   $zminnaopis=$_POST['zminnaopis'];
   if ($zminnaopis=='') unset($zminnaopis);
 }
-$zminnatip = mysql_real_escape_string($zminnatip);
-$zminnanazva = mysql_real_escape_string($zminnanazva);
-$zminnaavtor = mysql_real_escape_string($zminnaavtor);
-$zminnatimes = mysql_real_escape_string($zminnatimes);
-$zminnaopis = mysql_real_escape_string($zminnaopis);
+// $zminnatip = mysql_real_escape_string($zminnatip);
+// $zminnanazva = mysql_real_escape_string($zminnanazva);
+// $zminnaavtor = mysql_real_escape_string($zminnaavtor);
+// $zminnatimes = mysql_real_escape_string($zminnatimes);
+// $zminnaopis = mysql_real_escape_string($zminnaopis);
 
 if (isset($zminnaids) &&
     isset($zminnaavtor) &&
@@ -43,31 +43,31 @@ if (isset($zminnaids) &&
     isset($zminnatip) &&
     isset($zminnaphotozag) &&
     isset($zminnaopis)) {
-//   $sql = 'UPDATE dt_vistava
-//           SET nazva = :nazva, avtor = :avtor, times = :times,
-//               photozag = :photozag, tip = :tip, opis = :opis
-//           WHERE id = :id';
-//   $result = $db1->prepare($sql);
-//   $result->bindParam(':id', $zminnaids, PDO::PARAM_STR);
-//   $result->bindParam(':nazva', $zminnanazva, PDO::PARAM_STR);
-//   $result->bindParam(':avtor', $zminnaavtor, PDO::PARAM_STR);
-//   $result->bindParam(':times', $zminnatimes, PDO::PARAM_STR);
-//   $result->bindParam(':photozag', $zminnaphotozag, PDO::PARAM_STR);
-//   $result->bindParam(':tip', $zminnatip, PDO::PARAM_STR);
-//   $result->bindParam(':opis', $zminnaopis, PDO::PARAM_STR);
-//   $response1 = $result->execute();
-//
-//   if ($response1) {
-//     echo "Рядок видалено";
-//   } else {
-//     echo "Помилка";
-//   }
+  $sql = 'UPDATE dt_vistava
+          SET nazva = :nazva, avtor = :avtor, times = :times,
+              photozag = :photozag, tip = :tip, opis = :opis
+          WHERE id = :id';
+  $result = $db1->prepare($sql);
+  $result->bindParam(':id', $zminnaids, PDO::PARAM_STR);
+  $result->bindParam(':nazva', $zminnanazva, PDO::PARAM_STR);
+  $result->bindParam(':avtor', $zminnaavtor, PDO::PARAM_STR);
+  $result->bindParam(':times', $zminnatimes, PDO::PARAM_STR);
+  $result->bindParam(':photozag', $zminnaphotozag, PDO::PARAM_STR);
+  $result->bindParam(':tip', $zminnatip, PDO::PARAM_STR);
+  $result->bindParam(':opis', $zminnaopis, PDO::PARAM_STR);
+  $response1 = $result->execute();
 
-  $mys=mysql_query("UPDATE dt_vistava
-                    SET    nazva='$zminnanazva', avtor='$zminnaavtor',
-                           times='$zminnatimes', photozag='$zminnaphotozag',
-                           tip='$zminnatip', opis='$zminnaopis'
-                    WHERE  id='$zminnaids'");
-    if ($mys == 'true') echo "Рядок успішно редагований";
-    else echo "error";
+  if ($response1) {
+    echo "Рядок видалено";
+  } else {
+    echo "Помилка";
+  }
+
+  // $mys=mysql_query("UPDATE dt_vistava
+  //                   SET    nazva='$zminnanazva', avtor='$zminnaavtor',
+  //                          times='$zminnatimes', photozag='$zminnaphotozag',
+  //                          tip='$zminnatip', opis='$zminnaopis'
+  //                   WHERE  id='$zminnaids'");
+  //   if ($mys == 'true') echo "Рядок успішно редагований";
+  //   else echo "error";
   }

@@ -1,11 +1,10 @@
 <?php
-
 include 'block/connect.php';
+$db1 = Db::getConnection();
 
-// Get form data
-if (isset($_POST['zminnatema'])) {
-  $zminnatema = $_POST['zminnatema'];
-  if ($zminnatema == '') unset($zminnatema);
+if (isset($_POST['articleTitle'])) {
+  $articleTitle = $_POST['articleTitle'];
+  if ($articleTitle == '') unset($articleTitle);
 }
 if (isset($_POST['shortcontent'])) {
   $shortContent = $_POST['shortcontent'];
@@ -19,41 +18,43 @@ if (isset($_POST['zminnatxt'])) {
   $zminnatxt = $_POST['zminnatxt'];
   if ($zminnatxt == '') unset($zminnatxt);
 }
-if (isset($_POST['photo_id'])) {
-  $photoId = $_POST['photo_id'];
-  if ($photoId == '') unset($photoId);
-}
 
-// Delete special chars from string. Obsolete since PHP 5.5.0
-$zminnatema = mysql_real_escape_string($zminnatema);
-$shortContent = mysql_real_escape_string($shortContent);
-$zminnatxt = mysql_real_escape_string($zminnatxt);
-
-// Insert data into database
-if (isset($zminnatema) &&
+if (isset($articleTitle) &&
     isset($shortContent) &&
     isset($zminnadate) &&
     isset($zminnatxt)) {
-  $mys = mysql_query("INSERT INTO dt_news (tema, short_content, date, txt)
-  VALUES ('$zminnatema', '$shortContent', '$zminnadate', '$zminnatxt')");
-  if ($mys == 'true') {
-    echo "Новина опублікована";
+  $sql = 'INSERT INTO dt_news (tema, short_content, date, txt)
+          VALUES (:tema, :short_content, :date, :txt)';
+  $result = $db1->prepare($sql);
+  $result->bindParam(':tema', $articleTitle, PDO::PARAM_STR);
+  $result->bindParam(':short_content', $shortContent, PDO::PARAM_STR);
+  $result->bindParam(':date', $zminnadate, PDO::PARAM_STR);
+  $result->bindParam(':txt', $zminnatxt, PDO::PARAM_STR);
+  $response = $result->execute();
+
+  $result = $db1->query("SELECT id FROM dt_news WHERE tema = '$articleTitle'");
+  $result->setFetchMode(PDO::FETCH_ASSOC);
+  $articleId = $result->fetch();
+
+  $sql = 'INSERT INTO dt_photo (photo, id_act, id_vist, id_new, category)
+          VALUES (:photo, :id_act, :id_vist, :id_new, :category)';
+  $result = $db1->prepare($sql);
+  $photo = 'b6.jpg';
+  $actorId = '0';
+  $spectacleId = '0';
+  $category = '1';
+  $result->bindParam(':photo', $photo, PDO::PARAM_STR);
+  $result->bindParam(':id_act', $actorId, PDO::PARAM_STR);
+  $result->bindParam(':id_vist', $spectacleId, PDO::PARAM_STR);
+  $result->bindParam(':id_new', $articleId['id'], PDO::PARAM_STR);
+  $result->bindParam(':category', $category, PDO::PARAM_STR);
+  $response = $result->execute();
+
+  if ($response == 'true') {
+    echo "Рядок добавлений!";
   } else {
-    echo "Помилка запису до бази даних";
+    echo "Помилка";
   }
 } else {
   echo "Заповніть всі поля";
-}
-
-if (isset($photoId)) {
-
-  // Get article id by title
-  $result = mysql_query("SELECT id FROM dt_news WHERE tema='$zminnatema'");
-  do {
-    $idNew = $row['id'];
-  } while ($row = mysql_fetch_array($result));
-  echo $idNew;
-
-  // Set id_new by article id
-  $sql = mysql_query("UPDATE dt_photo SET id_new='$idNew' WHERE id='$photoId'");
 }

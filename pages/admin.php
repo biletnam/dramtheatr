@@ -2,6 +2,7 @@
 session_start();
 include 'teatradmin/block/connect.php';
 $db1 = Db::getConnection();
+$message = 'Впишіть логін та пароль';
 
 if (isset($_POST['login'])) {
   $login = $_POST['login'];
@@ -18,7 +19,6 @@ if (isset($_POST['ok'])) {
                          WHERE login='$currentUserLogin'
                          AND pass='$currentUserPassword'");
   $result->fetch();
-  $message = '';
   if ($result->rowCount() != 1) {
     $message = "Введені логін і пароль не вірні";
   } else {

@@ -337,7 +337,7 @@ $('#myTabs a').click(function (e) {
     ["fontsize", ["fontsize"]],
     ["color", ["color"]],
     ["para", ["ul", "ol", "paragraph"]],
-    ['insert', ['video', 'link']],
+    ['insert', ['picture', 'video', 'link']],
     // ["insert", ["picture", "video", "link"]],
     ["table", ["table"]],
     ["fullscreen", ["fullscreen", "codeview"]]
