@@ -6,15 +6,7 @@ $db1 = Db::getConnection();
 
 $id = $_GET["id"];
 
-$result = $db1->query("SELECT
-  dt_actors.name,
-  dt_actors.posada,
-  dt_actors.txt,
-  dt_photo.photo
-  FROM dt_actors
-  INNER JOIN dt_photo
-  ON dt_actors.id=dt_photo.id_act
-  WHERE dt_actors.id='$id'");
+$result = $db1->query("SELECT name, posada, txt, photo FROM dt_actors WHERE id = '$id'");
 $result->setFetchMode(PDO::FETCH_ASSOC);
 $worker = $result->fetch();
 

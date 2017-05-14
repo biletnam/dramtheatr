@@ -27,13 +27,12 @@ $db1 = Db::getConnection();
 	<div class="container">
 		<div class="team-list" id="art-dir-team">
 			<?php
-			$result = $db1->query("SELECT name, posada, sort, dt_actors.id, dt_photo.photo
-														 FROM dt_actors INNER JOIN dt_photo
-														 ON dt_actors.id=dt_photo.id_act WHERE id_n='1'
-														 ORDER BY sort ASC");
-			// $result = $db1->query("SELECT name, posada, id
-			// 											 FROM dt_actors
-			// 											 WHERE id_n='1'");
+			// $result = $db1->query("SELECT name, posada, sort, dt_actors.id, dt_photo.photo
+			// 											 FROM dt_actors INNER JOIN dt_photo
+			// 											 ON dt_actors.id=dt_photo.id_act WHERE id_n='1'
+			// 											 ORDER BY sort ASC");
+			$result = $db1->query("SELECT name, posada, sort, id, photo
+				FROM dt_actors WHERE id_n='1' ORDER BY sort ASC");
 			$myrows = array();
  			$i = 0;
  			while ($row = $result->fetch()) {
@@ -46,7 +45,7 @@ $db1 = Db::getConnection();
 			$i = 1;
 			$d = 1;
 			foreach ($myrows as $myrow) {
-				if ($i == 1) printf("<div class='row'>");
+				if ($i == 1) {printf("<div class='row'>");}
 				if ($d == 1) {
 					$i++;
 					printf("<div class='col-md-3 col-sm-6'></div>");
@@ -55,10 +54,11 @@ $db1 = Db::getConnection();
 				<div class='col-md-3 col-sm-6'>
 					<a href='/pages/team-person.php?id=<?php echo $myrow['id'];?>'>
 						<figure class='team'>
-							<img src='/pages/img/<?php echo $myrow['photo']; ?>'
+							<div style="background: url(/pages/img/<?php echo $myrow['photo']; ?>)center/cover;height: 335px;width: 223px;margin: 0 0 10px 25px;"></div>
+							<!-- <img src='/pages/img/<?php //echo $myrow['photo']; ?>'
 									 height='335'
 									 width='223'
-									 alt='photo'>
+									 alt='photo'> -->
 							<p><?php echo $myrow['name'];?></p>
 							<span><?php echo $myrow['posada'];?></span>
 						</figure>
@@ -78,18 +78,17 @@ $db1 = Db::getConnection();
 			}
 			if ($i != 1) printf("</div><!-- end row -->");
 				?>
-			</div><!-- end row -->
+
 		</div><!-- end team-list -->
 		<!-- ##################################################### -->
 		<div class="team-list" id="actors">
 			<?php
-			// $result = $db1->query("SELECT name, posada, id
-			// 											 FROM dt_actors
-			// 											 WHERE id_n='2'");
-			$result = $db1->query("SELECT name, posada, sort, dt_actors.id, dt_photo.photo
-														 FROM dt_actors INNER JOIN dt_photo
-														 ON dt_actors.id=dt_photo.id_act WHERE id_n='2'
-														 ORDER BY sort ASC");
+			// $result = $db1->query("SELECT name, posada, sort, dt_actors.id, dt_photo.photo
+			// 											 FROM dt_actors INNER JOIN dt_photo
+			// 											 ON dt_actors.id=dt_photo.id_act WHERE id_n='2'
+			// 											 ORDER BY sort ASC");
+			$result = $db1->query("SELECT name, posada, sort, id, photo
+				FROM dt_actors WHERE id_n='2' ORDER BY sort ASC");
 			$myrows = array();
  			$i = 0;
  			while ($row = $result->fetch()) {
@@ -106,10 +105,11 @@ $db1 = Db::getConnection();
 				<div class='col-md-3 col-sm-6'>
 					<a href='/pages/team-person.php?id=<?php echo $myrow["id"];?>'>
 						<figure class='team'>
-							<img src='/pages/img/<?php echo $myrow['photo']; ?>'
+							<div style="background: url(/pages/img/<?php echo $myrow['photo']; ?>)center/cover;height: 335px;width: 223px;margin: 0 0 10px 25px;"></div>
+							<!-- <img src='/pages/img/<?php //echo $myrow['photo']; ?>'
 									 height='335'
 									 width='223'
-									 alt='photo'>
+									 alt='photo'> -->
 							<p><?php echo $myrow["name"];?></p>
 							<span><?php echo $myrow["posada"];?></span>
 						</figure>
@@ -129,21 +129,19 @@ $db1 = Db::getConnection();
 		<!-- ##################################################### -->
 		<div class="team-list" id="balet">
 			<?php
-			// $result = $db1->query("SELECT name, posada, id
-			// 											 FROM dt_actors
-			// 											 WHERE id_n='3'");
-			$result = $db1->query("SELECT name, posada, sort, dt_actors.id, dt_photo.photo
-														 FROM dt_actors INNER JOIN dt_photo
-														 ON dt_actors.id=dt_photo.id_act WHERE id_n='3'
-														 ORDER BY sort ASC");
+			// $result = $db1->query("SELECT name, posada, sort, dt_actors.id, dt_photo.photo
+			// 											 FROM dt_actors INNER JOIN dt_photo
+			// 											 ON dt_actors.id=dt_photo.id_act WHERE id_n='3'
+			// 											 ORDER BY sort ASC");
+			$result = $db1->query("SELECT name, posada, sort, id, photo
+				FROM dt_actors WHERE id_n='3' ORDER BY sort ASC");
 			$myrows = array();
  			$i = 0;
  			while ($row = $result->fetch()) {
- 			  $myrows[$i]['id'] = $row['id'];
- 			  $myrows[$i]['name'] = $row['name'];
- 			  $myrows[$i]['posada'] = $row['posada'];
+				$myrows[$i]['id'] = $row['id'];
+				$myrows[$i]['name'] = $row['name'];
 				$myrows[$i]['photo'] = $row['photo'];
- 			  $i++;
+				$i++;
  			}
 			$i=1;
 			foreach ($myrows as $myrow) {
@@ -152,12 +150,12 @@ $db1 = Db::getConnection();
 				<div class='col-md-3 col-sm-6'>
 					<a href='/pages/team-person.php?id=<?php echo $myrow["id"];?>'>
 						<figure class='team'>
-							<img src='/pages/img/<?php echo $myrow['photo']; ?>'
+							<div style="background: url(/pages/img/<?php echo $myrow['photo']; ?>)center/cover;height: 335px;width: 223px;margin: 0 0 10px 25px;"></div>
+							<!-- <img src='/pages/img/<?php echo $myrow['photo']; ?>'
 									 height='335'
 									 width='223'
-									 alt='photo'>
+									 alt='photo'> -->
 							<p><?php echo $myrow["name"];?></p>
-							<span><?php echo $myrow["posada"];?></span>
 						</figure>
 					</a>
 				</div><?php
@@ -172,13 +170,12 @@ $db1 = Db::getConnection();
 			<!-- ##################################################### -->
 			<div class="team-list" id="orkestr">
 				<?php
-				// $result = $db1->query("SELECT name, posada, id
-				// 											 FROM dt_actors
-				// 											 WHERE id_n='4'");
-				$result = $db1->query("SELECT name, posada, sort, dt_actors.id, dt_photo.photo
-															 FROM dt_actors INNER JOIN dt_photo
-															 ON dt_actors.id=dt_photo.id_act WHERE id_n='4'
-															 ORDER BY sort ASC");
+				// $result = $db1->query("SELECT name, posada, sort, dt_actors.id, dt_photo.photo
+				// 											 FROM dt_actors INNER JOIN dt_photo
+				// 											 ON dt_actors.id=dt_photo.id_act WHERE id_n='4'
+				// 											 ORDER BY sort ASC");
+				$result = $db1->query("SELECT name, posada, sort, id, photo
+					FROM dt_actors WHERE id_n='4' ORDER BY sort ASC");
 				$myrows = array();
 	 			$i = 0;
 	 			while ($row = $result->fetch()) {
@@ -195,12 +192,13 @@ $db1 = Db::getConnection();
 					<div class='col-md-3 col-sm-6'>
 						<a href='/pages/team-person.php?id=<?php echo $myrow["id"];?>'>
 							<figure class='team'>
-								<img src='/pages/img/<?php echo $myrow['photo']; ?>'
+								<div style="background: url(/pages/img/<?php echo $myrow['photo']; ?>)center/cover;height: 335px;width: 223px;margin: 0 0 10px 25px;"></div>
+								<!-- <img src='/pages/img/<?php //echo $myrow['photo']; ?>'
 										 height='335'
 										 width='223'
-										 alt='photo'>
+										 alt='photo'> -->
 								<p><?php echo $myrow["name"];?></p>
-								<span><?php echo $myrow["posada"];?></span>
+								<!-- <span><?php //echo $myrow["posada"];?></span> -->
 							</figure>
 						</a>
 					</div><?php

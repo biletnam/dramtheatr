@@ -31,9 +31,16 @@ while ($row = $result->fetch()) {
           <form action="teatradmin/sub.php" method="POST" enctype=multipart/form-data>
 
             <p>Завантажте файл:</p>
-            <input type='file' name='uploadfile' id='uploadfile'/></br></br>
+            <input type='file' name='uploadfile' id='uploadfile'/>
 
-            <p>Зв'язати з працівником:</p>
+            <p>Вибрати місце розташування:</p>
+            <select name="category" id="category">
+              <option value='1'>Головна (портрет)</option>
+              <option value='2'>Банер (квадрат)</option>
+              <option value='3'>Галерея (пейзаж)</option>
+            </select>
+
+            <!-- <p>Зв'язати з працівником:</p>
             <select name="smena_dir" id="smena_dir">
               <option value="0">Виберіть категорію</option>
               <option value="1">Керівники</option>
@@ -44,10 +51,10 @@ while ($row = $result->fetch()) {
 
             <select name="smena_actors" id="smena_actors">
               <option value="">Виберіть працівника</option>
-            </select></br></br>
+            </select></br></br> -->
 
-            <div id="vivod_actors"></div>
-            <div id="messagea"></div>
+            <!-- <div id="vivod_actors"></div> -->
+            <!-- <div id="messagea"></div> -->
 
             <p>Зв'язати з виставою:</p>
             <select name="attachToArticle" id="attachToArticle">
@@ -55,7 +62,7 @@ while ($row = $result->fetch()) {
               <?php foreach ($spectacles as $spectacle): ?>
                 <option value="<?php echo $spectacle['id']; ?>"><?php echo $spectacle['nazva']; ?></option>
               <?php endforeach; ?>
-            </select></br></br>
+            </select>
             <div id="vivod_peps"></div>
 
             <p>Зв'язати з новиною:</p>
@@ -65,16 +72,9 @@ while ($row = $result->fetch()) {
                 <option value="<?php echo $article['id']; ?>"><?php echo $article['date']; ?> <?php echo $article['tema']; ?></option>
               <?php endforeach; ?>
               ?>
-            </select></br></br>
+            </select>
             <!-- <div id="redaktirov"></div> -->
             <!-- <div id="vivod_peps"></div> -->
-
-            <p>Вибрати місце розташування:</p>
-            <select name="category" id="category">
-              <option value='1'>Головна (портрет)</option>
-              <option value='2'>Банер (квадрат)</option>
-              <option value='3'>Галерея (пейзаж)</option>
-            </select></br></br>
 
             <input type='submit' name='submit' value ='Внести'/></p>
           </form>
@@ -226,36 +226,36 @@ while ($row = $result->fetch()) {
       });
     });
 
-    $("#smena_dir").change(function() {
-      var country_id = $(this).val();
-      $.ajax({
-        url: "teatradmin/fetch_state.php",
-        method: "POST",
-        data: {
-          countryId: country_id
-        },
-        dataType: "html",
-        success: function(data) {
-          $("#smena_actors").html(data);
-        }
-      });
-    });
+    // $("#smena_dir").change(function() {
+    //   var country_id = $(this).val();
+    //   $.ajax({
+    //     url: "teatradmin/fetch_state.php",
+    //     method: "POST",
+    //     data: {
+    //       countryId: country_id
+    //     },
+    //     dataType: "html",
+    //     success: function(data) {
+    //       $("#smena_actors").html(data);
+    //     }
+    //   });
+    // });
 
-    $("#smena_actors").change(function() {
-      var znach = $(this).val();
-      $.ajax({
-        url: "teatradmin/foto.php",
-        method: "POST",
-        data: {
-          zminna: znach
-        },
-        dataType: "html",
-        success: function(data)
-        {
-          $("#vivod_actors").html(data);
-        }
-      });
-    });
+    // $("#smena_actors").change(function() {
+    //   var znach = $(this).val();
+    //   $.ajax({
+    //     url: "teatradmin/foto.php",
+    //     method: "POST",
+    //     data: {
+    //       zminna: znach
+    //     },
+    //     dataType: "html",
+    //     success: function(data)
+    //     {
+    //       $("#vivod_actors").html(data);
+    //     }
+    //   });
+    // });
 
     $("#change_workers").click(function() {
       var znachids = $("#ids").val();

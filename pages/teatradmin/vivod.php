@@ -3,36 +3,47 @@
 		<?php
 		include 'block/connect.php';
 		$db1 = Db::getConnection();
-		if (isset($_POST['zminna'])) {
-			$zminna = $_POST['zminna'];
-		}
-		
-		$result = $db1->query("SELECT * from dt_actors WHERE id='$zminna'");
-		while ($row = $result->fetch()) {
-			printf ("
-			<input name='ids' id='ids' type='hidden' value='%s'>
-			<input name='idn' id='idn' type='hidden' value='%s'><br>
-			<p>Порядок сортування:</p>
-			<input type='text' id='sort' name='sort' size='7' value='%s'/>
-			<p>Прізвище та Імя:</p>
-			<input type='text' id='nama' name='nama' size='89' value='%s'/>
-			<p>Посада:</p>
-			<input type='text' id='posad_a' name='posad_a' size='89' value='%s'/>
-			<p>Заслуги:</p>
-			<div id='txtt'>%s</div>
-			<div id='ot1p'></div>
-			<p><form name='send' id='send' action=''><br>
-			</p></form>", $row["id"], $row["id_n"],$row["sort"],
-										$row["name"], $row["posada"], $row["txt"]);
+		if (isset($_POST['workerId'])) {
+			$workerId = $_POST['workerId'];
 		}
 
-		$result = $db1->query("SELECT * from dt_vistava");
+		$result = $db1->query("SELECT * from dt_actors WHERE id='$workerId'");
 		while ($row = $result->fetch()) {
-			printf ("
-			<div class='col-md-6 col-sm-6' style='font-size: 12px'>
-				<input alt='%s' name='checkbox' id='%s' class='my-checkbox'
-							 type='checkbox' value='%s'> %s</input>
-			</div>", $row["id_rep"], $row["id"],$row["nazva"],$row["nazva"]);
+
+?>
+
+<form action="teatradmin/din_up.php" method="post" enctype="multipart/form-data">
+	<input name="updateWorkerId" type="text" hidden value="<?php echo $row['id']; ?>">
+	<input name="oldWorkerImage" type="text" hidden value="<?php echo $row['photo']; ?>">
+	<p>Категорія працівника:</p>
+	<select name="updateWorkerCategory" style="width: 100%">
+		<option value="1" <?php echo ($row['id_n'] == 1)?"selected":""; ?>>Художньо-керівний склад</option>
+		<option value="2" <?php echo ($row['id_n'] == 2)?"selected":""; ?>>Актори</option>
+		<option value="3" <?php echo ($row['id_n'] == 3)?"selected":""; ?>>Балет</option>
+		<option value="4" <?php echo ($row['id_n'] == 4)?"selected":""; ?>>Оркестр</option>
+	</select>
+	<p style="margin-top: 5px;">Зображення:</p>
+	<input type="file" name="updateWorkerImage">
+	<p style="margin-top: 5px;">Порядок сортування:</p>
+	<input type="text" name="oldWorkerRank" value="<?php echo $row['sort']; ?>" hidden>
+	<input type="text" name="updateWorkerRank" value="<?php echo $row['sort']; ?>" style="width: 100%">
+	<p style="margin-top: 5px;">Прізвище та Імя:</p>
+	<input type="text" name="updateWorkerName" value="<?php echo $row['name']; ?>" style="width: 100%">
+	<p style="margin-top: 5px;">Посада:</p>
+	<input type="text" name="updateWorkerPosition" value="<?php echo $row['posada']; ?>" style="width: 100%">
+	<p style="margin-top: 5px;">Заслуги:</p>
+	<textarea name="updateWorkerMerit" id="updateWorkerMerit"><?php echo $row['txt']; ?></textarea>
+	<input type="submit" name="updateWorkerButton" value="Оновити">
+</form>
+
+<?php
+		// $result = $db1->query("SELECT * from dt_vistava");
+		// while ($row = $result->fetch()) {
+		// 	printf ("
+		// 	<div class='col-md-6 col-sm-6' style='font-size: 12px'>
+		// 		<input alt='%s' name='checkbox' id='%s' class='my-checkbox'
+		// 					 type='checkbox' value='%s'> %s</input>
+		// 	</div>", $row["id_rep"], $row["id"],$row["nazva"],$row["nazva"]);
 		}
 		?>
 	</div>
@@ -40,7 +51,7 @@
 
 <script>
 $(document).ready(function() {
-	$('#txtt').summernote({
+	$('#updateWorkerMerit').summernote({
 		height: 300
 	});
 });
