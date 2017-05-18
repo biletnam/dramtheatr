@@ -10,7 +10,7 @@ if (isset($_POST['spectacleCategory'])) {
 
 $result = $db1->query("SELECT * FROM dt_vistava
                        WHERE id_rep='$spectacleCategory'");
-echo "<option>Виберіть тему</option>";
+echo "<option>Виберіть виставу</option>";
 while ($row = $result->fetch()) {
   printf ("<option value='%s'>%s</option>", $row["id"],$row["nazva"]);
 }

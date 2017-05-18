@@ -14,8 +14,6 @@ if (isset($zminnaiddel)) {
   $result = $db1->prepare($sql);
   $result->bindParam(':id', $zminnaiddel, PDO::PARAM_STR);
   $result->execute();
-} else {
-  echo "Заповніть всі поля";
 }
 
 if (isset($repertoireSpectacleId)) {
@@ -23,10 +21,12 @@ if (isset($repertoireSpectacleId)) {
   $result = $db1->prepare($sql);
   $result->bindParam(':id', $repertoireSpectacleId, PDO::PARAM_STR);
   $result->execute();
+  $sql = 'DELETE FROM dt_roles WHERE spectacle_id = :id';
+  $result = $db1->prepare($sql);
+  $result->bindParam(':id', $repertoireSpectacleId, PDO::PARAM_STR);
+  $result->execute();
   $sql = 'DELETE FROM dt_group_afisha WHERE id = :id';
   $result = $db1->prepare($sql);
   $result->bindParam(':id', $repertoireSpectacleId, PDO::PARAM_STR);
   $result->execute();
-} else {
-  echo "Заповніть всі поля";
 }

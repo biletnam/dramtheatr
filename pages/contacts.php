@@ -9,7 +9,7 @@
 			<div class="row">
 				<div class="col-md-6">
 						<div class="forma">
-							<form id="form" class="form" method="post">
+							<form id="form" class="form" method="post" action="contacts.php">
 								<div style="width: 500px; outline: 1px solid #5D0808;">
 									<p style="width: 320px; margin: 0 auto; color: #5D0808; font-weight: bold; font-size: 18px;">
 										Адреса театру: Театральна площа, 4
@@ -43,14 +43,15 @@
 							if (isset($_POST["phones"])) $phones = $_POST['phones'];
 							if (isset($_POST["messages"])) $messages = $_POST['messages'];
 							if (isset($_POST["mail"])) $mail = $_POST['mail'];
-							$to      = 'kvdvadim@meta.ua';
+							// $to      = 'kvdvadim@meta.ua';
+							$to      = 'vberkoz@gmail.com';
 							$subject = $name;
 							$message = $messages;
 							$phone   = $phones;
 							$headers = $mail . "\r\n" .
 												 'Reply-To: http://teatr.da-wsp.com.ua/' . "\r\n" .
 												 'X-Mailer: PHP/' . phpversion();
-							mail($to, $subject, $message,$phone, $headers);
+							mail($to, $subject, $message, $phone, $headers);
 							?>
 
 							<div class="done">
@@ -77,4 +78,14 @@
 			</div><!-- end container -->
 		</div><!-- end contacts -->
 	</section><!-- end theatre -->
+	<?php
+// the message
+$msg = "First line of text\nSecond line of text";
+
+// use wordwrap() if lines are longer than 70 characters
+$msg = wordwrap($msg,70);
+
+// send email
+mail("vberkoz@gmail.com","My subject",$msg);
+?>
 	<?php include 'footer.php' ?>

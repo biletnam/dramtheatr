@@ -17,15 +17,19 @@ while ($row = $result->fetch()) {
     <div class="row">
       <fieldset>
         <legend><h2>Добавити:</h2></legend>
-        <p>Тема:</p>
-        <input type="text" id="articleTitle" style="width: 100%"/><br/><br/>
-        <p>Коротка стаття:</p>
-        <div id="short_content"></div>
-        <p>Повна стаття:</p>
-        <div id="full_content"></div>
-        <p>Виберіть дату (місяць, день, рік):</p>
-        <input type="date" id="date">
-        <input type="button" id="add_news" value="Додати">
+        <form action="teatradmin/add_news.php" method="post" enctype="multipart/form-data">
+          <p>Тема:</p>
+          <input type="text" name="createArticleTitle" style="width: 100%"/>
+          <p style="margin-top: 5px;">Зображення:</p>
+          <input type="file" name="createArticleImage">
+          <p style="margin-top: 5px;">Коротка стаття:</p>
+          <textarea id="createArticleShortContent" name="createArticleShortContent"></textarea>
+          <p style="margin-top: 5px;">Повна стаття:</p>
+          <textarea id="createArticleFullContent" name="createArticleFullContent"></textarea>
+          <p style="margin-top: 5px;">Виберіть дату (місяць, день, рік):</p>
+          <input type="date" id="date" name="createArticleDate">
+          <input type="submit" value="Додати">
+        </form>
       </fieldset>
 
       <fieldset>
@@ -49,8 +53,9 @@ while ($row = $result->fetch()) {
             <option value="<?php echo $article['id']; ?>"><?php echo $article['date']; ?> <?php echo $article['tema']; ?></option>
           <?php endforeach; ?>
         </select>
-        <div id="redaktirov"></div>
-        <input type="button" id="updateArticleButton" value="Оновити">
+        <div id="redaktirov">
+          <input type="button" id="updateArticleButton" value="Оновити">
+        </div>
       </fieldset>
     </div>
   </div>
@@ -59,7 +64,7 @@ while ($row = $result->fetch()) {
 <script>
 // добавлення новини
 
-  $('#short_content').summernote({
+  $('#createArticleShortContent').summernote({
   fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '24', '36', '48'],
   toolbar: [
     ['style', ['style']],
@@ -76,7 +81,7 @@ while ($row = $result->fetch()) {
   focus: false
   });
 
-  $("#full_content").summernote({
+  $("#createArticleFullContent").summernote({
   fontSizes: ["8", "9", "10", "11", "12", "14", "16", "18", "24", "36", "48"],
   toolbar: [
     ["style", ["style"]],
@@ -102,27 +107,6 @@ $(document).ready(function(){
     return local.toJSON().slice(0,10);
   });
   $('#date').val(new Date().toDateInputValue());
-
-  $("#add_news").click(function(){
-    var articleTitle = $("#articleTitle").val();
-    var shortcontent = $("#short_content").summernote('code');
-    var znachtxt = $("#full_content").summernote('code');
-    var znachdate = $("#date").val();
-    $.ajax({
-      url: "teatradmin/add_news.php",
-      method: "POST",
-      data: {
-        articleTitle: articleTitle,
-        shortcontent: shortcontent,
-        zminnatxt: znachtxt,
-        zminnadate: znachdate
-      },
-      dataType: "html",
-      success: function (data) {
-        location.reload();
-      }
-    });
-  });
 
   // видалення новини
   $("#deleteArticleButton").click(function() {
@@ -155,28 +139,28 @@ $(document).ready(function(){
       }
     });
   });
-  $("#updateArticleButton").click(function() {
-    var articleId = $("#articleId").val();
-    var updateArticleTitle = $("#updateArticleTitle").val();
-    var updateShortContent = $("#updateShortContent").summernote('code');
-    var updateFullContent = $("#updateFullContent").summernote('code');
-    var updateDate = $("#updateDate").val();
-    $.ajax({
-      url:  "teatradmin/red_news.php",
-      method: "POST",
-      data: {
-        articleId: articleId,
-        updateArticleTitle: updateArticleTitle,
-        updateShortContent: updateShortContent,
-        updateFullContent: updateFullContent,
-        updateDate: updateDate
-      },
-      dataType: "html",
-      success:  function(data) {
-        location.reload();
-      }
-    });
-  });
+  // $("#updateArticleButton").click(function() {
+  //   var articleId = $("#articleId").val();
+  //   var updateArticleTitle = $("#updateArticleTitle").val();
+  //   var updateShortContent = $("#updateShortContent").summernote('code');
+  //   var updateFullContent = $("#updateFullContent").summernote('code');
+  //   var updateDate = $("#updateDate").val();
+  //   $.ajax({
+  //     url:  "teatradmin/red_news.php",
+  //     method: "POST",
+  //     data: {
+  //       articleId: articleId,
+  //       updateArticleTitle: updateArticleTitle,
+  //       updateShortContent: updateShortContent,
+  //       updateFullContent: updateFullContent,
+  //       updateDate: updateDate
+  //     },
+  //     dataType: "html",
+  //     success:  function(data) {
+  //       location.reload();
+  //     }
+  //   });
+  // });
 
 });
 </script>

@@ -44,6 +44,7 @@ $db1 = Db::getConnection();
  			}
 			$i = 1;
 			$d = 1;
+			$row = 1;
 			foreach ($myrows as $myrow) {
 				if ($i == 1) {printf("<div class='row'>");}
 				if ($d == 1) {
@@ -51,7 +52,7 @@ $db1 = Db::getConnection();
 					printf("<div class='col-md-3 col-sm-6'></div>");
 				}
 				?>
-				<div class='col-md-3 col-sm-6'>
+				<div class='col-md-3 col-sm-6' style="<?php echo ($row == 10)?"margin-left: 150px;":""; ?>">
 					<a href='/pages/team-person.php?id=<?php echo $myrow['id'];?>'>
 						<figure class='team'>
 							<div style="background: url(/pages/img/<?php echo $myrow['photo']; ?>)center/cover;height: 335px;width: 223px;margin: 0 0 10px 25px;"></div>
@@ -75,6 +76,7 @@ $db1 = Db::getConnection();
 				$i++;
 				$d++;
 				if ($i == 5) $i = 1;
+				$row++;
 			}
 			if ($i != 1) printf("</div><!-- end row -->");
 				?>

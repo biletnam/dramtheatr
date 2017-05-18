@@ -8,6 +8,11 @@ if (isset($_POST['articleId'])) {
 }
 
 if (isset($articleId)) {
+  $result = $db1->query("SELECT photo FROM dt_news WHERE id='$articleId'");
+  $result->setFetchMode(PDO::FETCH_ASSOC);
+  $articleImage = $result->fetch();
+  unlink('../img/'.$articleImage['photo']);
+
   $sql = 'DELETE FROM dt_news WHERE id = :id';
   $result = $db1->prepare($sql);
   $result->bindParam(':id', $articleId, PDO::PARAM_STR);

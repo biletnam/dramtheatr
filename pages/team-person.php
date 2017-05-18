@@ -4,26 +4,25 @@ include 'top-line-menu.php';
 include 'teatradmin/block/connect.php';
 $db1 = Db::getConnection();
 
-$id = $_GET["id"];
+$actor_id = $_GET["id"];
 
-$result = $db1->query("SELECT name, posada, txt, photo FROM dt_actors WHERE id = '$id'");
+$result = $db1->query("SELECT name, posada, txt, photo FROM dt_actors WHERE id = '$actor_id'");
 $result->setFetchMode(PDO::FETCH_ASSOC);
 $worker = $result->fetch();
 
-$result = $db1->query("SELECT DISTINCT
-  dt_vistava_actors.id_v,
-  dt_vistava_actors.id_n,
+$result = $db1->query("SELECT
+  dt_roles.spectacle_id,
+  dt_roles.role,
   dt_vistava.nazva
-  FROM dt_vistava_actors
+  FROM dt_roles
   INNER JOIN dt_vistava
-  ON dt_vistava_actors.id_v=dt_vistava.id
-  WHERE id_a = '$id'
-  ORDER BY id_n DESC");
+  ON dt_roles.spectacle_id = dt_vistava.id
+  WHERE dt_roles.actor_id = '$actor_id'");
 $spectacles = array();
 $i = 0;
 while ($row = $result->fetch()) {
-  $spectacles[$i]['id_v'] = $row['id_v'];
-  $spectacles[$i]['id_n'] = $row['id_n'];
+  $spectacles[$i]['spectacle_id'] = $row['spectacle_id'];
+  $spectacles[$i]['role'] = $row['role'];
   $spectacles[$i]['nazva'] = $row['nazva'];
   $i++;
 }
@@ -45,12 +44,26 @@ while ($row = $result->fetch()) {
           <article><?php echo $worker["posada"] ?></article>
           <hr>
           <p><?php echo $worker["txt"]?></p>
-          <?php foreach ($spectacles as $spectacle): ?>
-            <a href='/pages/spectacle.php?id=<?php echo $spectacle['id_v']; ?>&id_n=<?php echo $spectacle['id_n']; ?>'>
-              <?php echo $spectacle['nazva']; ?>
-            </a><br>
-          <?php endforeach; ?>
-          <br>
+          <center style="margin-bottom: 100px;">
+            <?php if ($spectacles): ?>
+              <p>Ролі та вистави</p>
+            <?php endif; ?>
+            <table>
+              <tbody>
+                <?php foreach ($spectacles as $spectacle): ?>
+                  <tr>
+                    <td align="right"><?php echo $spectacle["role"]; ?></td>
+                    <td style="padding-left: 20px;">
+                      <a class="actor-link"
+                         href="/pages/spectacle.php?id=<?php echo $spectacle["spectacle_id"]; ?>">
+                        <?php echo $spectacle["nazva"]; ?>
+                      </a>
+                    </td>
+                  </tr>
+                <?php endforeach; ?>
+              </tbody>
+            </table>
+          </center>
         </div>
       </div>
     </div>

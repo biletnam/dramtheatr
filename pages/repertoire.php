@@ -6,18 +6,8 @@ $db1 = Db::getConnection();
 
 function getSpectaclesByAudience($audience) {
   $db1 = Db::getConnection();
-  $result = $db1->query("SELECT
-    dt_vistava.id,
-    dt_vistava.tip,
-    dt_vistava.nazva,
-    dt_vistava.avtor,
-    dt_vistava.times,
-    dt_photo.photo
-    FROM dt_vistava
-    INNER JOIN dt_photo
-    ON dt_vistava.id = dt_photo.id_vist
-    WHERE id_rep = '$audience' AND category = '1'
-    ORDER BY dt_vistava.id DESC");
+  $result = $db1->query("SELECT id, tip, nazva, avtor, times, photo
+    FROM dt_vistava WHERE id_rep = '$audience' ORDER BY id DESC");
   $spectacles = array();
   $i = 0;
   while ($row = $result->fetch()) {
@@ -56,10 +46,9 @@ function getSpectaclesByAudience($audience) {
     <?php $adults = getSpectaclesByAudience(1); $i = 0; ?>
     <?php foreach ($adults as $adult): ?>
       <?php if ($i == 0 || $i == 1): ?>
-        <a href='/pages/spectacle.php?id=<?php echo $adult['id']; ?>&id_n=2'>
+        <a href='/pages/spectacle.php?id=<?php echo $adult['id']; ?>'>
           <div class='reper-block reper-block-img'>
-            <img src='/pages/img/<?php echo $adult['photo']; ?>'
-                 height='480' width='480' alt='photo' /> <!-- photo -->
+            <div style="opacity: 1; background: url(/pages/img/<?php echo $adult['photo']; ?>)center/cover; height:325px; width:350px;"></div>
           </div>
           <div class='reper-block reper-block-text' style="max-height: 325px;">
             <figure>
@@ -72,7 +61,7 @@ function getSpectaclesByAudience($audience) {
         </a>
       <?php endif; ?>
       <?php if ($i == 2 || $i == 3): ?>
-        <a href='/pages/spectacle.php?id=<?php echo $adult['id']; ?>&id_n=2'>
+        <a href='/pages/spectacle.php?id=<?php echo $adult['id']; ?>'>
           <div class='reper-block reper-block-text' style="max-height: 325px;">
             <figure>
               <article><?php echo $adult['nazva']; ?></article><br>
@@ -82,8 +71,7 @@ function getSpectaclesByAudience($audience) {
             </figure>
           </div>
           <div class='reper-block reper-block-img'>
-            <img src='/pages/img/<?php echo $adult['photo']; ?>'
-                 height='480' width='480' alt='photo' /> <!-- photo -->
+            <div style="opacity: 1; background: url(/pages/img/<?php echo $adult['photo']; ?>)center/cover; height:325px; width:350px;"></div>
           </div>
         </a>
       <?php endif; $i++; ?>
@@ -94,10 +82,9 @@ function getSpectaclesByAudience($audience) {
     <?php $children = getSpectaclesByAudience(2); $i = 0; ?>
     <?php foreach ($children as $child): ?>
       <?php if ($i == 0 || $i == 1): ?>
-        <a href='/pages/spectacle.php?id=<?php echo $child['id']; ?>&id_n=2'>
+        <a href='/pages/spectacle.php?id=<?php echo $child['id']; ?>'>
           <div class='reper-block reper-block-img'>
-            <img src='/pages/img/<?php echo $child['photo']; ?>'
-                 height='480' width='480' alt='photo' /> <!-- photo -->
+            <div style="opacity: 1; background: url(/pages/img/<?php echo $child['photo']; ?>)center/cover; height:325px; width:350px;"></div>
           </div>
           <div class='reper-block reper-block-text' style="max-height: 325px;">
             <figure>
@@ -110,7 +97,7 @@ function getSpectaclesByAudience($audience) {
         </a>
       <?php endif; ?>
       <?php if ($i == 2 || $i == 3): ?>
-        <a href='/pages/spectacle.php?id=<?php echo $child['id']; ?>&id_n=2'>
+        <a href='/pages/spectacle.php?id=<?php echo $child['id']; ?>'>
           <div class='reper-block reper-block-text' style="max-height: 325px;">
             <figure>
               <article><?php echo $child['nazva']; ?></article><br>
@@ -120,8 +107,7 @@ function getSpectaclesByAudience($audience) {
             </figure>
           </div>
           <div class='reper-block reper-block-img'>
-            <img src='/pages/img/<?php echo $child['photo']; ?>'
-                 height='480' width='480' alt='photo' /> <!-- photo -->
+            <div style="opacity: 1; background: url(/pages/img/<?php echo $child['photo']; ?>)center/cover; height:325px; width:350px;"></div>
           </div>
         </a>
       <?php endif; $i++; ?>

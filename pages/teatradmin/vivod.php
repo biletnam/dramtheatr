@@ -36,16 +36,7 @@
 	<input type="submit" name="updateWorkerButton" value="Оновити">
 </form>
 
-<?php
-		// $result = $db1->query("SELECT * from dt_vistava");
-		// while ($row = $result->fetch()) {
-		// 	printf ("
-		// 	<div class='col-md-6 col-sm-6' style='font-size: 12px'>
-		// 		<input alt='%s' name='checkbox' id='%s' class='my-checkbox'
-		// 					 type='checkbox' value='%s'> %s</input>
-		// 	</div>", $row["id_rep"], $row["id"],$row["nazva"],$row["nazva"]);
-		}
-		?>
+<?php } ?>
 	</div>
 </div>
 

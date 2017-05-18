@@ -11,15 +11,15 @@ while ($row = $result->fetch()) {
   $i++;
 }
 
-$result = $db1->query("SELECT * FROM dt_news ORDER BY date DESC");
-$articles = array();
-$i = 0;
-while ($row = $result->fetch()) {
-  $articles[$i]['id'] = $row['id'];
-  $articles[$i]['date'] = $row['date'];
-  $articles[$i]['tema'] = substr($row['tema'], 0, 200);
-  $i++;
-}
+// $result = $db1->query("SELECT * FROM dt_news ORDER BY date DESC");
+// $articles = array();
+// $i = 0;
+// while ($row = $result->fetch()) {
+//   $articles[$i]['id'] = $row['id'];
+//   $articles[$i]['date'] = $row['date'];
+//   $articles[$i]['tema'] = substr($row['tema'], 0, 200);
+//   $i++;
+// }
 ?>
 
   <section class="theatre parallax-window-news" data-parallax="scroll" data-image-src="/img/news/news-bg.jpg">
@@ -56,23 +56,23 @@ while ($row = $result->fetch()) {
             <!-- <div id="vivod_actors"></div> -->
             <!-- <div id="messagea"></div> -->
 
-            <p>Зв'язати з виставою:</p>
+            <!-- <p>Зв'язати з виставою:</p>
             <select name="attachToArticle" id="attachToArticle">
               <option value=' '>Виберіть виставу</option>
-              <?php foreach ($spectacles as $spectacle): ?>
-                <option value="<?php echo $spectacle['id']; ?>"><?php echo $spectacle['nazva']; ?></option>
-              <?php endforeach; ?>
+              <?php //foreach ($spectacles as $spectacle): ?>
+                <option value="<?php //echo $spectacle['id']; ?>"><?php //echo $spectacle['nazva']; ?></option>
+              <?php //endforeach; ?>
             </select>
-            <div id="vivod_peps"></div>
+            <div id="vivod_peps"></div> -->
 
-            <p>Зв'язати з новиною:</p>
+            <!-- <p>Зв'язати з новиною:</p>
             <select name="id_new">
               <option value=' '>Виберіть статтю</option>
-              <?php foreach ($articles as $article): ?>
-                <option value="<?php echo $article['id']; ?>"><?php echo $article['date']; ?> <?php echo $article['tema']; ?></option>
-              <?php endforeach; ?>
+              <?php //foreach ($articles as $article): ?>
+                <option value="<?php //echo $article['id']; ?>"><?php //echo $article['date']; ?> <?php //echo $article['tema']; ?></option>
+              <?php //endforeach; ?>
               ?>
-            </select>
+            </select> -->
             <!-- <div id="redaktirov"></div> -->
             <!-- <div id="vivod_peps"></div> -->
 
@@ -257,32 +257,32 @@ while ($row = $result->fetch()) {
     //   });
     // });
 
-    $("#change_workers").click(function() {
-      var znachids = $("#ids").val();
-      // var znachidn=$("#idn").val();
-      var znachname=$("#nama").val();
-      var znachposada=$("#posad_a").val();
-      var znachphoto=$("#phot_o").val();
-      var znachtxt=$("#txtt").val();
-      var znachsort=$("#sort").val();
-      $.ajax({
-        url:"teatradmin/din_up.php",
-        method:"POST",
-        data: {
-          zminnaids: znachids,
-          zminnaidn: znachidn,
-          zminnaname: znachname,
-          zminnaposada: znachposada,
-          zminnaphoto: znachphoto,
-          zminnatxt: znachtxt,
-          zminnasort: znachsort
-        },
-        dataType:"html",
-        success:function(data) {
-          $("#messagea").html(data);
-        }
-      });
-    });
+    // $("#change_workers").click(function() {
+    //   var znachids = $("#ids").val();
+    //   // var znachidn=$("#idn").val();
+    //   var znachname=$("#nama").val();
+    //   var znachposada=$("#posad_a").val();
+    //   var znachphoto=$("#phot_o").val();
+    //   var znachtxt=$("#txtt").val();
+    //   var znachsort=$("#sort").val();
+    //   $.ajax({
+    //     url:"teatradmin/din_up.php",
+    //     method:"POST",
+    //     data: {
+    //       zminnaids: znachids,
+    //       zminnaidn: znachidn,
+    //       zminnaname: znachname,
+    //       zminnaposada: znachposada,
+    //       zminnaphoto: znachphoto,
+    //       zminnatxt: znachtxt,
+    //       zminnasort: znachsort
+    //     },
+    //     dataType:"html",
+    //     success:function(data) {
+    //       $("#messagea").html(data);
+    //     }
+    //   });
+    // });
     var $text = $('#text-input'),
     $box = $('.my-checkbox');
     $box.on('click change', function() {

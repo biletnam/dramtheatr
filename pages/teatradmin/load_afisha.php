@@ -6,24 +6,15 @@ $db1 = Db::getConnection();
 if (isset($_POST['zminnaid'])) {
   $zminnaid = $_POST['zminnaid'];
 }
-$result = $db1->query("SELECT
-  id,
-  nazva,
-  avtor,
-  times,
-  id_rep,
-  tip,
-  photozag,
-  start
-  FROM dt_vistava
-  WHERE id = '$zminnaid'");
+$result = $db1->query("SELECT id, nazva, avtor, times, id_rep, tip, photo, start
+  FROM dt_vistava WHERE id = '$zminnaid'");
 $result->setFetchMode(PDO::FETCH_ASSOC);
 $article = $result->fetch();
 ?>
 
 <form name='send' id='send'><br>
   <input name='idn' id='idn' type='hidden' value="<?php echo $article['id']; ?>"><br>
-  <input name='photozag' id='photozag' type='hidden' value="<?php echo $article['photozag']; ?>">
+  <input name='photozag' id='photozag' type='hidden' value="<?php echo $article['photo']; ?>">
   <input name='avtor' id='avtor' type='hidden' value="<?php echo $article['avtor']; ?>">
   <input name='times' id='times' type='hidden' value="<?php echo $article['times']; ?>">
   <input name='tip' id='tip' type='hidden' value="<?php echo $article['tip']; ?>">

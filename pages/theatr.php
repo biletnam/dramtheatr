@@ -21,9 +21,7 @@ switch ($date[1]) {
 
 $da = date('Y-m');
 $result = $db1->query("SELECT * FROM dt_group_afisha
-  INNER JOIN dt_photo
-  ON dt_group_afisha.id_af = dt_photo.id_vist
-  WHERE start LIKE '$da%' AND category = '2' ORDER BY start ASC");
+  WHERE start LIKE '$da%' ORDER BY start ASC");
 
 $i = 1;
 while ($myrow = $result->fetch()) {
@@ -37,7 +35,7 @@ while ($myrow = $result->fetch()) {
   if ($i == 1 or $i == 2){
     printf("
     <div class='reper-block reper-block-img' style='position: relative;'>
-    <div style='opacity: 1; background: url(/pages/img/$myrow[photo])center/cover; height:325px; width:350px;'>
+    <div style='opacity: 1; background: url(/pages/img/$myrow[photozag])center/cover; height:325px; width:350px;'>
     <div class='opaline'><p>$day $m $time</p></div>
     </div>
     </div>
@@ -65,7 +63,7 @@ while ($myrow = $result->fetch()) {
     </div>
     </a>
     <div class='reper-block reper-block-img' style='position: relative;'>
-    <div style='opacity: 1; background: url(/pages/img/$myrow[photo])center/cover; height:325px; width:350px;'>
+    <div style='opacity: 1; background: url(/pages/img/$myrow[photozag])center/cover; height:325px; width:350px;'>
     <div class='opaline'><p>$day $m $time</p></div>
     </div>
     </div>", $myrow["id_af"], $myrow["themas"], $myrow["avtor"], $myrow["tip"], $myrow["times"]);
